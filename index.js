@@ -4,9 +4,13 @@ const bodyParser=require('body-parser')
 const mongoose=require('mongoose')
 const User = require('./models/User')
 
+const productRoutes=require('./routes/productRoutes')
+
 const server=express()
 server.use(cors())
 server.use(bodyParser.json())
+server.use('/product',productRoutes)
+
 
 mongoose.connect('mongodb+srv://dhiraj:Dhiraj%40123@cluster0.o6utges.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0').then(()=>console.log('Database is connected')) .catch((err)=>console.log(err))
 
