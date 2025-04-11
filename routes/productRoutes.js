@@ -22,7 +22,7 @@ router.post('/add',async(req,res)=>{
     catch(error){
         res.json({
             status:false,
-            message:`Error ${error}`
+            message:error
         })
     }
 })
@@ -37,11 +37,43 @@ router.get('/get',async(req,res)=>{
     catch(error){
         res.json({
             status:false,
-            message:`Error ${error}`
+            message:error
         })
     }
 })
+router.delete('/delete/:id',async(req,res)=>{
+    try{
+        const id =req.params.id
+        await product.findByIdAndDelete(id)
+        res.json({
+            status:true,
+            message:'Product deleted successufully'
+        })
+    }
+    catch(error){
+        res.json({
+            status:false,
+            message:error
+        })
+    }
+})
+router.put('/update/:id',async(req,res)=>{
+    try{
+        const id=req.params.id
+        await product.findByIdAndUpdate(id,req.body,{'new':true})
+        res.json({
+            status:true,
+            message:'Product updated successufully'
+        })
 
+    }
+    catch(error){
+        res.json({
+            status:false,
+            message:error
+        })
+    }
+})
 
 
 
