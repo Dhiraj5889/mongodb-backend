@@ -38,6 +38,24 @@ server.post('/register',async(req,res)=>{
         })
     }
 })
+server.get('/get-user/:id',async(req,res)=>{
+    try{
+        const id = req.params.id
+        const result=await User.find()
+        
+        res.json({
+            status:true,
+            message:result
+        })
+    }
+    catch(error){
+        res.json({
+            status:false,
+            message:error
+        })
+    }
+})
+
 server.post('/login',async(req,res)=>{
     try{
         const {userName,password}=req.body
@@ -57,6 +75,22 @@ server.post('/login',async(req,res)=>{
         res.json({
             status:true,
             message:'Login succsefully'
+        })
+    }
+    catch(error){
+        res.json({
+            status:false,
+            message:`Error ${error}`
+        }) 
+    }
+})
+server.get('/get-users/:userName',async(req,res)=>{
+    try{
+        const userName = req.params.userName
+        const obj = await User.find({userName})
+        res.json({
+            status:true,
+            message:obj
         })
     }
     catch(error){

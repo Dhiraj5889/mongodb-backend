@@ -1,5 +1,6 @@
 const express=require('express')
 const product = require('../models/product')
+const User = require('../models/User')
 const router=express.Router()
 
 router.post('/add',async(req,res)=>{
